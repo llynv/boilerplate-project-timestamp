@@ -24,6 +24,14 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/", (req, res) => {
+  const nDate = new Date()
+  res.json({
+    unix: nDate.getTime(),
+    utc: nDate.toUTCString()
+  })
+})
+
 app.get("/api/:date", (req, res) => {
   const {date} = req.params
   let nDate;
@@ -37,7 +45,6 @@ app.get("/api/:date", (req, res) => {
     res.status(404).json({
       'error': nDate.toUTCString()
     })
-    res.end()
   }
   res.json({
     'unix': nDate.getTime(),
